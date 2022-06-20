@@ -1,0 +1,12 @@
+int binarySearch(const vector<int>& nums, int target) {
+    int left =0, right = (int)num.size()-1;
+
+    while(left <= right) { //循环的结束条件是左值大于右值；
+        int mid = left + (right - left) / 2;
+        if (num[mid] == target) return mid;
+        else if (nums[mid] < target) left = mid + 1; //已经明确nums[mid]不是target，所以left = mid + 1；
+        else right = mid - 1; //right的更新逻辑与left相同；
+        //注意这里有+1和-1的操作是因为左下界和右下界是整型，若为实数则不能+1和-1，直接赋值为mid；
+    }
+    return -1; //未找到；
+}

@@ -1,0 +1,7 @@
+void recursion(int level, int param) {
+    //recursion terminator
+    if (level > MAX_LEVEL) {
+        //process result
+        return ;
+    }
+}

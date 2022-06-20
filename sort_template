@@ -1,0 +1,97 @@
+//快速排序；
+static int partition(int [] a, int begin, int end) {
+    //pivot：标杆的位置，counter：小于pivot的元素的个数；
+    int pivot = end, counter = begin;
+    for (int i = begin; i < end; i++) {
+        if (a[i] < a[pivot]) {
+            int temp = a[counter]; a[counter] = a[i]; a[i] = temp;
+            counter++；
+        }
+    }
+    int temp = a[pivot]; a[pivot] = a[counter]; a[counter] = temp;
+    return counter;
+}
+
+public static void quickSort(int[] array, int begin, int end) {
+    if (end <= begin) return;
+    int pivot = partition(array, begin, end);
+    quickSort(array, begin, pivot - 1);
+    quickSort(array, pivot + 1, end);
+}
+
+
+//归并排序；
+public static void mergeSort(int[] array, int left, int right) {
+    if (right <= left) return;
+    int mid = (left + right) >> 1;
+
+    mergeSort(array, left, mid);
+    mergeSort(array, mid + 1, right);
+    merge(array, left, mid, right);
+}
+
+//将两个已排序的数组(left到mid，mid+1到right)合并在一起；
+public static void merge(int[] arr, int left, int mid, int right) {
+    int[] temp = new int[right - left + 1]; //需要申请一块额外的内存空间；
+    int i = left, j = mid + 1, k = 0; //i和j分别代表两个已排序数组的起始位置；k表示已经填入temp的元素个数；
+
+    while (i <= mid && j <= right) { //两个数组都还没有循环完；
+        temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++]; //把两者中的较小者赋值给temp[k]，同时较小者的索引往后挪；
+    }
+    while(i <= mid) temp[k++] = arr[i++]; //如果i数组没有走完；
+    while(j <= right) temp[k++] = arr[j++]; //如果j数组没有走完；
+
+//把temp放回arr中去；
+    for (int p = 0; p < temp.length; p++) {
+        arr[left + p] = temp[p];
+    }
+}
+
+
+//堆排序 C++
+//插入删除和维护的时间复杂度O(logN)，取最大/最小值O(1)；
+void heap_sort(int a[], int len) {
+    priority_queue<int,vector<int>, greater<int> >q;
+    for (int i = 0; i < len; i++) {
+        q.push(a[i]);
+    }
+    for(int i = 0; i < len; i++) {
+        a[i] = q.pop();
+    }
+}
+
+//Java
+static void heapify(int[] array, int length, int i) {
+    int left = 2 * i + 1, right = 2 * i + 2;
+    int largest = i;
+
+    if (left < length && array[left] > array[largest]) {
+        largest = leftChild;
+    }
+    if (right < length && array[right] > array[largest]) {
+        largest = right;
+    }
+
+    if (largest ！= i) {
+        int temp = array[i]; array[i] = array[largest]; array[largest] = temp;
+        heapify(array, length, largest);
+    }
+}
+
+public static void heapSort(int [] array) {
+    if (array.length == 0) return;
+
+    int length = array.length;
+    for (int i = length / 2 - 1; i >= 0; i--){
+        heapify(array, length, i);
+    }
+
+    for (int i = length - 1; i >= 0; i--) {
+        int temp = array[0]; array[0] = array[i]; array[i] = temp;
+        heapify(array, i, 0);
+    }
+}
+
+
+
+
