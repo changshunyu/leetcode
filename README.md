@@ -1,1 +1,3 @@
 # leetcode
+
+# simple is beautiful?
