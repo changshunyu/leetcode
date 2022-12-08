@@ -2,5 +2,5 @@
 
 # simple is beautiful!
 
-walk together
+# walk together
 # echo
