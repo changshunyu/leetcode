@@ -1,3 +1,3 @@
 # leetcode
 
-# simple is beautiful?
+# simple is beautiful!
